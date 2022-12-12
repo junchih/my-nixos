@@ -1,8 +1,12 @@
-{ lib, config, pkgs, ... }:
+module-args:
 
 with builtins;
 
 let
+
+  lib = module-args.lib;
+  pkgs = module-args.pkgs;
+  modulesPath = module-args.modulesPath;
 
   list-user-files =
     path:
@@ -19,7 +23,7 @@ let
       })
       file-names;
 
-  include-file = file: import file { inherit lib config pkgs; };
+  include-file = file: import file module-args;
 
   read-user-confs =
     user-files:
@@ -43,7 +47,7 @@ in
 
   users.users =
     let
-      user-confs = read-user-confs (list-user-files ./users.d);
+      user-confs = read-user-confs (list-user-files (modulesPath + /users.d));
       kv-pairs = map ({user, conf}: {name = user; value = conf;}) user-confs;
       users-conf = listToAttrs kv-pairs;
     in

@@ -1,11 +1,12 @@
-{ lib, config, pkgs, ... }:
+module-args:
 
 with builtins;
 
 let
 
-  host-conf = import ./configuration.nix { inherit lib config pkgs; };
-  hostname = host-conf.networking.hostName;
+  modulesPath = module-args.modulesPath;
+  configuration = module-args.configuration;
+  hostname = configuration.networking.hostName;
 
 in
 

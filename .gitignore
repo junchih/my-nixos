@@ -1,3 +1,5 @@
 /hardware-configuration.nix
 /configuration.nix
 /configuration.json
+/configuration_git.nix
+/configuration_git.json

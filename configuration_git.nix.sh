@@ -7,7 +7,11 @@ with builtins;
 
 let
   lib = module-args.lib;
-  modulesPath = module-args.modulesPath;
+  my-nixos = fetchGit {
+    url = \"https://github.com/junchih/nixos.git\";
+    ref = \"devel\";
+  };
+  modulesPath = my-nixos;
   gen-configuration =
     configuration:
     let

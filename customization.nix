@@ -1,8 +1,11 @@
-{ lib, config, pkgs, ... }:
+module-args:
 
 with builtins;
 
 let
+
+  lib = module-args.lib;
+  modulesPath = module-args.modulesPath;
 
   list-all-imports =
     path:
@@ -30,11 +33,11 @@ let
 
     in import-list;
 
-  include-file = file: (import file) { inherit lib config pkgs; };
+  include-file = file: (import file) module-args;
 
 in
 
   foldl' lib.recursiveUpdate {}
   (
-    map include-file (list-all-imports ./.)
+    map include-file (list-all-imports modulesPath)
   )

@@ -5,7 +5,6 @@ with builtins;
 let
 
   lib = module-args.lib;
-  modulesPath = module-args.modulesPath;
 
   list-all-imports =
     path:
@@ -39,5 +38,5 @@ in
 
   foldl' lib.recursiveUpdate {}
   (
-    map include-file (list-all-imports modulesPath)
+    map include-file (list-all-imports ./.)
   )

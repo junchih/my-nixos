@@ -6,7 +6,6 @@ let
 
   lib = module-args.lib;
   pkgs = module-args.pkgs;
-  modulesPath = module-args.modulesPath;
 
   list-user-files =
     path:
@@ -47,7 +46,7 @@ in
 
   users.users =
     let
-      user-confs = read-user-confs (list-user-files (modulesPath + /users.d));
+      user-confs = read-user-confs (list-user-files (./users.d));
       kv-pairs = map ({user, conf}: {name = user; value = conf;}) user-confs;
       users-conf = listToAttrs kv-pairs;
     in

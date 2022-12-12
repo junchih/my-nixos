@@ -4,7 +4,6 @@ with builtins;
 
 let
 
-  modulesPath = module-args.modulesPath;
   pkgs = module-args.pkgs;
   configuration = module-args.configuration;
   has-xserver = configuration.services.xserver.enable;

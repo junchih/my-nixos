@@ -4,7 +4,6 @@ with builtins;
 
 let
 
-  modulesPath = module-args.modulesPath;
   configuration = module-args.configuration;
   hostname = configuration.networking.hostName;
   has-xserver = configuration.services.xserver.enable;

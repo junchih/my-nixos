@@ -12,7 +12,7 @@ then echo "
 "
 else echo "
     fetchGit {
-      url = \"https://github.com/junchih/nixos.git\";
+      url = \"$(pwd)/.git\";
       ref = \"master\";
       rev = \"$(git rev-parse HEAD)\";
     };

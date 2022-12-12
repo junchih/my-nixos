@@ -6,10 +6,10 @@
 	sh $< > $@
 
 
-default: configuration.nix configuration_debug.nix
+default: configuration.nix
 
 
-debug: clean configuration.json configuration_debug.json
+json: clean configuration.json
 
 
 configuration.json: configuration.nix
@@ -17,11 +17,6 @@ configuration.json: configuration.nix
 		"import ./$< { config = {}; pkgs = import <nixpkgs> {}; lib = import <nixpkgs/lib>; modulesPath = ./.; }" \
 		> $@
 
-configuration_debug.json: configuration_debug.nix
-	NIXPKGS_ALLOW_UNFREE=1 nix-instantiate --strict --json --eval -E \
-		"import ./$< { config = {}; pkgs = import <nixpkgs> {}; lib = import <nixpkgs/lib>; modulesPath = ./.; }" \
-		> $@
-
 clean:
-	rm -rfv configuration{_debug,}.{nix,json}
+	rm -rfv configuration.{nix,json}
 

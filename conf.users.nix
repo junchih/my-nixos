@@ -47,7 +47,16 @@ in
   users.users =
     let
       user-confs = read-user-confs (list-user-files (./users.d));
-      kv-pairs = map ({user, conf}: {name = user; value = conf;}) user-confs;
+      kv-pairs =
+        map
+        (
+          {user, conf}:
+          {
+            name = trace "Include user: ${user}" user;
+            value = conf;
+          }
+        )
+        user-confs;
       users-conf = listToAttrs kv-pairs;
     in
       users-conf;

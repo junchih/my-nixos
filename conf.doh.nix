@@ -20,7 +20,7 @@ in
     };
 
     services.nginx = maybe-attrs {
-      enable = true;
+      enable = trace "Serving internal.sg.baidu-ai.func.xyz" true;
       virtualHosts."internal.sg.baidu-ai.func.xyz" = {
         default = true;
         forceSSL = true;

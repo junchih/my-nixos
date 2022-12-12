@@ -20,7 +20,7 @@ in
     };
 
     services.nginx = maybe-attrs {
-      enable = true;
+      enable = trace "Serving 1000k.cash" true;
       virtualHosts."1000k.cash" = {
         forceSSL = true;
         enableACME = true;

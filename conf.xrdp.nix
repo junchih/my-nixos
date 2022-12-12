@@ -15,7 +15,7 @@ in
 
   {
     services.xrdp = maybe-attrs {
-      enable = true;
+      enable = trace "Enable RDP service" true;
       defaultWindowManager = "startplasma-x11";
     };
   }

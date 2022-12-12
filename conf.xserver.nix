@@ -14,7 +14,7 @@ in
   {
     services.xserver = maybe-attrs {
       # Enable the X11 windowing system.
-      enable = true;
+      enable = trace "Enable X11 windowing system" true;
       resolutions = [
         { x = 1920; y = 1080; }
       ];

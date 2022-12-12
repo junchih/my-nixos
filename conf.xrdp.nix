@@ -1,21 +1,21 @@
-module-args:
-
-with builtins;
+{ configuration, lib, ...}:
+with lib;
 
 let
 
-  configuration = module-args.configuration;
   hostname = configuration.networking.hostName;
-  has-xserver = configuration.services.xserver.enable;
+  has-xserver = attrByPath ["services""xserver""enable"] false configuration;
+
+  maybe-attrs = optionalAttrs (
+    has-xserver &&
+    hostname == "lbnuc"
+  );
 
 in
 
   {
-    services.xrdp =
-      if has-xserver && hostname == "lbnuc" then
-      {
-        enable = true;
-        defaultWindowManager = "startplasma-x11";
-      }
-      else {};
+    services.xrdp = maybe-attrs {
+      enable = true;
+      defaultWindowManager = "startplasma-x11";
+    };
   }

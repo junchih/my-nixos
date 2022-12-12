@@ -33,7 +33,10 @@ let
       foldl' lib.recursiveUpdate {}
       (
         [
-          { imports = [ hardware ]; }
+          {
+            imports = [ hardware ];
+            networking.hostName = "nixos";
+          }
           (include-file (./. + "/${host-name}.nix"))
         ] ++ (
           map include-file (list-all-imports ./.)

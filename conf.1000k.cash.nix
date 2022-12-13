@@ -1,7 +1,8 @@
 { configuration, lib, ...}:
-with lib;
-
 let
+
+  inherit (builtins) trace;
+  inherit (lib) optionalAttrs;
 
   hostname = configuration.networking.hostName;
 

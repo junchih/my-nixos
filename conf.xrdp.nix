@@ -1,10 +1,11 @@
 { configuration, lib, ...}:
-with lib;
-
 let
 
+  inherit (builtins) trace;
+  inherit (lib) optionalAttrs;
+
   hostname = configuration.networking.hostName;
-  has-xserver = attrByPath ["services""xserver""enable"] false configuration;
+  has-xserver = configuration.services.xserver.enable or false;
 
   maybe-attrs = optionalAttrs (
     has-xserver &&

@@ -1,21 +1,22 @@
 host-name:
 hardware:
 
-{ lib, config, pkgs, ...}:
-with builtins;
-
+{ lib, config, pkgs, ... }@module-args:
 let
+
+  inherit (builtins) readDir attrNames foldl';
+  inherit (lib) filterAttrs hasPrefix hasSuffix recursiveUpdate;
 
   list-all-imports =
     path:
     let
       dir-content =
-        lib.filterAttrs
+        filterAttrs
         (
           file-name: file-type:
           file-type == "regular" &&
-          lib.hasPrefix "conf." file-name &&
-          lib.hasSuffix ".nix" file-name
+          hasPrefix "conf." file-name &&
+          hasSuffix ".nix" file-name
         )
         (readDir path);
       import-list =
@@ -27,10 +28,10 @@ let
   gen-configuration =
     configuration:
     let
-      my-module-args = { inherit lib config pkgs configuration; };
+      my-module-args = module-args // { inherit configuration; };
       include-file = file: import file my-module-args;
     in
-      foldl' lib.recursiveUpdate {}
+      foldl' recursiveUpdate {}
       (
         [
           {

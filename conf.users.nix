@@ -1,23 +1,20 @@
-module-args:
-
-with builtins;
-
+{ lib, pkgs, ... }@module-args:
 let
 
-  lib = module-args.lib;
-  pkgs = module-args.pkgs;
+  inherit (builtins) attrNames readDir trace listToAttrs filter;
+  inherit (lib) hasSuffix removeSuffix;
 
   list-user-files =
     path:
     let
       file-names =
         filter
-        (file-name: lib.hasSuffix ".nix" file-name)
+        (file-name: hasSuffix ".nix" file-name)
         (attrNames (readDir path));
     in
       map
       (file-name: {
-        user = lib.removeSuffix ".nix" file-name;
+        user = removeSuffix ".nix" file-name;
         file = path + ("/" + file-name);
       })
       file-names;
@@ -52,7 +49,7 @@ in
         (
           {user, conf}:
           {
-            name = trace "Include user: ${user}" user;
+            name = trace "Register user: ${conf.description or "..."}(${user})" user;
             value = conf;
           }
         )

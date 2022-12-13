@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
 
 echo "
-with builtins;
-
 let
+  inherit (builtins) fetchGit;
   my-nixos =
 "
 if [[ -v DEBUG ]];

@@ -1,9 +1,7 @@
 { configuration, lib, pkgs, ...}:
-with lib;
-
 let
 
-  has-xserver = attrByPath ["services""xserver""enable"] false configuration;
+  has-xserver = configuration.services.xserver.enable or false;
 
 in
 

@@ -24,8 +24,9 @@ in
 
     ] ++ (if has-xserver then [
 
-      fira-code
-      alacritty tor-browser-bundle-bin
+      fira-code hanazono
+      alacritty
+      tor-browser-bundle-bin
 
     ] else []);
 

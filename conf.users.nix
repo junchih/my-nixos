@@ -49,7 +49,7 @@ in
         (
           {user, conf}:
           {
-            name = trace "Register user: ${conf.description or "..."}(${user})" user;
+            name = trace "Register user: ${conf.description or "||||||"}(${user})" user;
             value = conf;
           }
         )

@@ -38,7 +38,7 @@ let
             imports = [ hardware ];
             networking.hostName = "nixos";
           }
-          (include-file (./. + "/${host-name}.nix"))
+          (include-file (./. + "/host.${host-name}.nix"))
         ] ++ (
           map include-file (list-all-imports ./.)
         )

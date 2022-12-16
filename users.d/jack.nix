@@ -14,13 +14,11 @@ in
     packages = with pkgs; [
 
       # normal life
-      wget curl croc tree dnsutils ncdu
+      wget curl croc tree dnsutils
       unzip unrar gnutar
-      ffmpeg yt-dlp
 
       # development environment
-      direnv git ctags gnumake binutils linuxPackages.perf
-      python3 black deno stylua
+      direnv git ctags
 
     ] ++ (if has-xserver then [
 

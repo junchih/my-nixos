@@ -18,7 +18,7 @@ in
       unzip unrar gnutar
 
       # development environment
-      direnv git ctags
+      direnv git gnumake ctags
 
     ] ++ (if has-xserver then [
 

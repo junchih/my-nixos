@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
   # solving "Module ahci not found error",
@@ -17,6 +17,9 @@
 
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = true;
+  environment.systemPackages = with pkgs; [
+    git
+  ];
   users.mutableUsers = false;
   users.users.pi = {
     isNormalUser = true;

@@ -1,5 +1,5 @@
 host-name:
-hardware:
+imports:
 
 { lib, config, pkgs, ... }@module-args:
 let
@@ -35,7 +35,7 @@ let
       (
         [
           {
-            imports = [ hardware ];
+            imports = imports;
             networking.hostName = "nixos";
           }
           (include-file (./. + "/host.${host-name}.nix"))

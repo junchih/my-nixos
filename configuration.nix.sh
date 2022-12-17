@@ -19,5 +19,5 @@ else echo "
 fi
 echo "
 in
-  import my-nixos \"$(hostname)\" ./hardware-configuration.nix
+  import my-nixos \"$(hostname)\" [ ./hardware-configuration.nix ]
 "

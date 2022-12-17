@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   # solving "Module ahci not found error",
@@ -11,7 +11,12 @@
   ];
 
   nixpkgs.crossSystem.system = "armv6l-linux";
+  nix.settings.substituters = lib.mkForce [ "https://cache.armv7l.xyz" ];
+  nix.settings.trusted-public-keys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
+  system.stateVersion = "22.05";
 
+  services.openssh.enable = true;
+  services.openssh.passwordAuthentication = true;
   users.mutableUsers = false;
   users.users.pi = {
     isNormalUser = true;

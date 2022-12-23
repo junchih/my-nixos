@@ -24,7 +24,6 @@ in
 
       fira-code hanazono
       alacritty
-      tor-browser-bundle-bin
 
     ] else []);
 
